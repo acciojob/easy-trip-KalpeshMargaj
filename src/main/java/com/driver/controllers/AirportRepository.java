@@ -135,17 +135,6 @@ public class AirportRepository {
 
     public int countOfBookingsDoneByPassengerAllCombined(Integer passengerId) {
         int count = 0;
-//        for(Map.Entry<Integer,List<Integer>> entry:flightToPassengerDb.entrySet())
-//        {
-//            List<Integer> passList = entry.getValue();
-//            for(Integer pass : passList)
-//            {
-//                if(pass == passengerId)
-//                {
-//                    count++;
-//                }
-//            }
-//        }
         for(List<Integer> l : flightToPassengerDb.values())
         {
             if(l.contains(passengerId))
@@ -177,6 +166,6 @@ public class AirportRepository {
         int fixedFare = 3000*noOfppl;
         int total = variableFare + fixedFare;
 
-        return 3000 + 50*noOfppl;
+        return total;
     }
 }
