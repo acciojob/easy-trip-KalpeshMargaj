@@ -80,7 +80,7 @@ public class AirportRepository {
         City city = airport.getCity();
         for(Flight flight:flightDb.values())
         {
-            if(flight.getFromCity()==city || flight.getFromCity()==city)
+            if(flight.getFromCity()==city || flight.getToCity()==city)
             {
                 int flightId = flight.getFlightId();
                 count =count + flightToPassengerDb.get(flightId).size();
@@ -98,7 +98,7 @@ public class AirportRepository {
 
     public String bookATicket(Integer flightId, Integer passengerId) {
         Flight flight = flightDb.get(flightId);
-        if(flightToPassengerDb.get(flightId) != null && flight.getMaxCapacity() <  flightToPassengerDb.get(flightId).size() )
+        if(flightToPassengerDb.get(flightId) != null && flight.getMaxCapacity() >  flightToPassengerDb.get(flightId).size() )
         {
             List<Integer> l = flightToPassengerDb.get(flightId);
             if(l.contains(passengerId))
@@ -135,15 +135,22 @@ public class AirportRepository {
 
     public int countOfBookingsDoneByPassengerAllCombined(Integer passengerId) {
         int count = 0;
-        for(Map.Entry<Integer,List<Integer>> entry:flightToPassengerDb.entrySet())
+//        for(Map.Entry<Integer,List<Integer>> entry:flightToPassengerDb.entrySet())
+//        {
+//            List<Integer> passList = entry.getValue();
+//            for(Integer pass : passList)
+//            {
+//                if(pass == passengerId)
+//                {
+//                    count++;
+//                }
+//            }
+//        }
+        for(List<Integer> l : flightToPassengerDb.values())
         {
-            List<Integer> passList = entry.getValue();
-            for(Integer pass : passList)
+            if(l.contains(passengerId))
             {
-                if(pass == passengerId)
-                {
-                    count++;
-                }
+                count++;
             }
         }
         return count;
@@ -170,6 +177,6 @@ public class AirportRepository {
         int fixedFare = 3000*noOfppl;
         int total = variableFare + fixedFare;
 
-        return total;
+        return 3000 + 50*noOfppl;
     }
 }
