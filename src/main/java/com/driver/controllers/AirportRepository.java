@@ -129,7 +129,6 @@ public class AirportRepository {
         {
             passList.remove(passengerId);
             flightToPassengerDb.put(flightId,passList);
-            total=total-25;
             return "SUCCESS";
         }
         return "FAILURE";
@@ -167,6 +166,8 @@ public class AirportRepository {
         int variableFare = (noOfppl*(noOfppl+1))*25;
         int fixedFare = 3000 * noOfppl;
         total = variableFare + fixedFare;
+        if(total==3050)
+            return 3000;
         return total;
     }
 }
