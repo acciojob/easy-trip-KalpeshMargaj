@@ -163,11 +163,11 @@ public class AirportRepository {
 
     public int calculateRevenueOfAFlight(Integer flightId) {
         int noOfppl = flightToPassengerDb.get(flightId).size();
-        int variableFare = (noOfppl*(noOfppl+1))*25;
+        int variableFare = (noOfppl*(noOfppl-1))*25;
         int fixedFare = 3000 * noOfppl;
         total = variableFare + fixedFare;
-        if(total==3050)
-            return 3000;
+//        if(total==3050)
+//            return 3000;
         return total;
     }
 }
